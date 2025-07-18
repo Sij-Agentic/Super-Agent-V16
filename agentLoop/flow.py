@@ -210,6 +210,8 @@ class AgentLoop4:
         while output.get("call_self") and call_count < max_calls - 1:
             call_count += 1
             
+            print(f"\n🔄 Agent '{agent_type}' entering self-call iteration {call_count + 1}/{max_calls}. Reason: {output.get('next_instruction')}\n")
+            
             # Handle code execution if needed from the *previous* step's output
             if context._has_executable_code(output):
                 execution_result = await context._auto_execute_code(step_id, output)
